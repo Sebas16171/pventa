@@ -15,7 +15,7 @@ public class Proveedor{
     public void Guarda_SQL(){
         String sql = "INSERT INTO `proveedor` (`nombre`, `rfc`, `telefono`, `correo`, `activo`)"+
         " VALUES ('%s', '%s', '%s', '%2d', '%sS')", nombre, rfc, telefono, correo, activo;
-
+          
         System.out.println(sql);
         
     }

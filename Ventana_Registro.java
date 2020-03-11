@@ -25,18 +25,28 @@ class Ventana_Registro extends JFrame implements ActionListener{
         
         JLabel lblNombre = new JLabel("Nombre");
         txtNombre = new JTextField();
+        lblNombre.setBounds(25, 25, 100, 30);
+        txtNombre.setBounds(50, 50, 250, 30);
 
         JLabel lblRFC = new JLabel("RFC");
         txtRFC = new JTextField();
+        lblRFC.setBounds(25, 100, 100, 30);
+        txtRFC.setBounds(50, 125, 250, 30);
 
         JLabel lblCorreo = new JLabel("Correo");
         txtCorreo = new JTextField();
+        lblCorreo.setBounds(25, 175, 100, 30);
+        txtCorreo.setBounds(50, 200, 250, 30);
 
         JLabel lblTelefono = new JLabel("Telefono");
         txtTelefono = new JTextField();
+        lblTelefono.setBounds(25, 300, 100, 30);
+        txtTelefono.setBounds(50, 325, 250, 30);
 
         rdCliente = new JRadioButton("Cliente", true);
+        rdCliente.setBounds(25, 50, 100, 30);
         rdProveedor = new JRadioButton("Proveedor", false);
+        rdProveedor.setBounds(25, 50, 100, 30);
 
         ButtonGroup grupo1 = new ButtonGroup();
         grupo1.add(rdCliente);
@@ -44,9 +54,13 @@ class Ventana_Registro extends JFrame implements ActionListener{
 
         JButton btnCancelar = new JButton("Cancelar");
         JButton btnListo = new JButton("Listo");
+        btnListo.setBounds(25, 50, 100, 30);
+        btnCancelar.setBounds(25, 50, 100, 30);
 
         btnCancelar.addActionListener(this);
         btnListo.addActionListener(this);
+        
+        mainFrame.setLayout(null);
 
         mainFrame.add(lblNombre);
         mainFrame.add(txtNombre);
@@ -56,20 +70,19 @@ class Ventana_Registro extends JFrame implements ActionListener{
         mainFrame.add(txtCorreo);
         mainFrame.add(lblTelefono);
         mainFrame.add(txtTelefono);
-        mainFrame.add(rdCliente);
-        mainFrame.add(rdProveedor);
-        mainFrame.add(btnListo);
-        mainFrame.add(btnCancelar);
+        //mainFrame.add(rdCliente);
+        //mainFrame.add(rdProveedor);
+        //mainFrame.add(btnListo);
+        //mainFrame.add(btnCancelar);
 
-        mainFrame.setLayout(new GridLayout(3, 4));
-
-        mainFrame.setSize(500, 275);
+        mainFrame.setSize(600, 300);
         mainFrame.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand() == "Listo"){
+
             String nombre = txtNombre.getText();
             String rfc = txtRFC.getText();
             String correo = txtCorreo.getText();
@@ -78,6 +91,8 @@ class Ventana_Registro extends JFrame implements ActionListener{
             boolean Proveedor;
             if (rdProveedor.isSelected() == true){
                 Proveedor temp_proveedor = new Proveedor(0, nombre, rfc, telefono, correo, true);
+                temp_proveedor.Guarda_SQL();
+                Nucleo.lst_Proveedores.add(temp_proveedor);
                 
                 
             }else if (rdCliente.isSelected() == true){
