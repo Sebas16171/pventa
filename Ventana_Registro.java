@@ -40,13 +40,13 @@ class Ventana_Registro extends JFrame implements ActionListener{
 
         JLabel lblTelefono = new JLabel("Telefono");
         txtTelefono = new JTextField();
-        lblTelefono.setBounds(25, 300, 100, 30);
-        txtTelefono.setBounds(50, 325, 250, 30);
+        lblTelefono.setBounds(25, 250, 100, 30);
+        txtTelefono.setBounds(50, 275, 250, 30);
 
         rdCliente = new JRadioButton("Cliente", true);
-        rdCliente.setBounds(25, 50, 100, 30);
+        rdCliente.setBounds(400, 50, 100, 30);
         rdProveedor = new JRadioButton("Proveedor", false);
-        rdProveedor.setBounds(25, 50, 100, 30);
+        rdProveedor.setBounds(400, 75, 100, 30);
 
         ButtonGroup grupo1 = new ButtonGroup();
         grupo1.add(rdCliente);
@@ -54,8 +54,8 @@ class Ventana_Registro extends JFrame implements ActionListener{
 
         JButton btnCancelar = new JButton("Cancelar");
         JButton btnListo = new JButton("Listo");
-        btnListo.setBounds(25, 50, 100, 30);
-        btnCancelar.setBounds(25, 50, 100, 30);
+        btnListo.setBounds(375, 200, 150, 45);
+        btnCancelar.setBounds(375, 250, 150, 45);
 
         btnCancelar.addActionListener(this);
         btnListo.addActionListener(this);
@@ -70,12 +70,13 @@ class Ventana_Registro extends JFrame implements ActionListener{
         mainFrame.add(txtCorreo);
         mainFrame.add(lblTelefono);
         mainFrame.add(txtTelefono);
-        //mainFrame.add(rdCliente);
-        //mainFrame.add(rdProveedor);
-        //mainFrame.add(btnListo);
-        //mainFrame.add(btnCancelar);
+        mainFrame.add(rdCliente);
+        mainFrame.add(rdProveedor);
+        mainFrame.add(btnListo);
+        mainFrame.add(btnCancelar);
 
-        mainFrame.setSize(600, 300);
+        mainFrame.setSize(600, 400);
+        mainFrame.setTitle("Registrar");
         mainFrame.setVisible(true);
     }
 
