@@ -89,15 +89,15 @@ class Ventana_Registro extends JFrame implements ActionListener{
             String correo = txtCorreo.getText();
             String telefono = txtTelefono.getText();
 
-            boolean Proveedor;
             if (rdProveedor.isSelected() == true){
+                //                                      ID  Nombre  RFC Telefono    Correo  Activo
                 Proveedor temp_proveedor = new Proveedor(0, nombre, rfc, telefono, correo, true);
-                temp_proveedor.Guarda_SQL();
+                //temp_proveedor.Guarda_SQL();
                 Nucleo.lst_Proveedores.add(temp_proveedor);
                 
                 
             }else if (rdCliente.isSelected() == true){
-                Proveedor = false;
+                Proveedor temp_cliente = new Proveedor(0, nombre, rfc, telefono, correo, true);
             }
 
         } else if (e.getActionCommand() == "Cancelar"){}
