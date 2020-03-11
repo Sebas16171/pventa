@@ -13,11 +13,12 @@ class Nucleo{
             String myDriver = "org.gjt.mm.mysql.Driver";
             String myUrl = "jdbc:mysql://localhost/pventa";
             Class.forName(myDriver);
-            con = DriverManager.getConnection(myUrl, "root", "");
+            con = DriverManager.getConnection(myUrl, usuario, clave);
             //con = DriverManager.getConnection(url1);
             if (con != null) {
                 System.out.println("Conexión 1: Conexión a mibase satisfacoria");
             }
+            System.err.println("Conectado");
         } catch (Exception e) {
             System.out.println("Sin conexion");
             System.err.println(e.getMessage());
@@ -25,21 +26,7 @@ class Nucleo{
     }
 
     public static void main(String[] args) {
-        try {
-            // create a java mysql database connection
-            String myDriver = "org.gjt.mm.mysql.Driver";
-            String myUrl = "jdbc:mysql://localhost/pventa";
-            Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myUrl, "root", "");
-
-            // your prepstatements goes here...
-            
-            conn.close();
-            System.err.println("Conectado");
-        } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
-        }
+        Conecta_BD("Sebas", "1234");
         Ventana_Principal V = new Ventana_Principal();
     }
 
