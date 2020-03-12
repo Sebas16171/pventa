@@ -100,7 +100,9 @@ class Ventana_Registro extends JFrame implements ActionListener{
                 
                 
             }else if (rdCliente.isSelected() == true){
-                Proveedor temp_cliente = new Proveedor(0, nombre, rfc, telefono, correo, true);
+                Cliente temp_cliente = new Cliente(0, nombre, rfc, telefono, correo, true);
+                temp_cliente.Guarda_SQL();
+                Nucleo.lst_Clientes.add(temp_cliente);
             }
 
         } else if (e.getActionCommand() == "Cancelar"){}

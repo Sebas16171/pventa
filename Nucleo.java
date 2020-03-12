@@ -5,6 +5,8 @@ import java.sql.*;
 class Nucleo{
     
     public static List<Proveedor> lst_Proveedores = new ArrayList<Proveedor>();
+    public static List<Cliente> lst_Clientes = new ArrayList<Cliente>();
+    
     private static Connection con = null;
     
     public static Object Execute_Query(String query){
