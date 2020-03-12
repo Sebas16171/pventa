@@ -89,10 +89,13 @@ class Ventana_Registro extends JFrame implements ActionListener{
             String correo = txtCorreo.getText();
             String telefono = txtTelefono.getText();
 
-            if (rdProveedor.isSelected() == true){
+            if (txtNombre.getText().isEmpty() || txtRFC.getText().isEmpty()  || txtCorreo.getText().isEmpty()  || txtTelefono.getText().isEmpty() ){
+                JOptionPane.showMessageDialog(null, "No se puede dejar ningun campo vacio.", "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+            } else if (rdProveedor.isSelected() == true){
                 //                                      ID  Nombre  RFC Telefono    Correo  Activo
                 Proveedor temp_proveedor = new Proveedor(0, nombre, rfc, telefono, correo, true);
-                //temp_proveedor.Guarda_SQL();
+                temp_proveedor.Guarda_SQL();
                 Nucleo.lst_Proveedores.add(temp_proveedor);
                 
                 

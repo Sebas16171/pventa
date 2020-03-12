@@ -7,18 +7,21 @@ class Nucleo{
     public static List<Proveedor> lst_Proveedores = new ArrayList<Proveedor>();
     private static Connection con = null;
     
-    private static void Conecta_BD(String usuario, String clave){
-        //String url1 = "jdbc:mysql://localhost:3306/pventa?user=" + usuario + "&pasword=" + clave;
+    public static void Execute_Query(String query){
         try {
             String myDriver = "org.gjt.mm.mysql.Driver";
             String myUrl = "jdbc:mysql://localhost/pventa";
             Class.forName(myDriver);
-            con = DriverManager.getConnection(myUrl, usuario, clave);
-            //con = DriverManager.getConnection(url1);
-            if (con != null) {
-                System.out.println("Conexión 1: Conexión a mibase satisfacoria");
+            con = DriverManager.getConnection(myUrl, "root", "");
+
+            if (query != ""){
+                Statement st = con.createStatement();
+
+                if (query.matches("INSERT INTO.*")){
+                    st.executeUpdate(query);
+                }
             }
-            System.err.println("Conectado");
+            con.close();
         } catch (Exception e) {
             System.out.println("Sin conexion");
             System.err.println(e.getMessage());
@@ -26,7 +29,7 @@ class Nucleo{
     }
 
     public static void main(String[] args) {
-        Conecta_BD("Sebas", "1234");
+        Execute_Query("");
         Ventana_Principal V = new Ventana_Principal();
     }
 
