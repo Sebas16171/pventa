@@ -19,9 +19,23 @@ public class Ventana_Principal extends JFrame implements ActionListener {
 
         mainFrame = new JFrame();
 
-        JButton btnComprar = new JButton("Comprar productos");
-        JButton btnVender = new JButton("Vender productos");
-        JButton btnRegistrar = new JButton("Registrar");
+        ImageIcon icoComprar = new ImageIcon("Images/btnComprar.png");
+        ImageIcon icoVender = new ImageIcon("Images/btnVender.png");
+        ImageIcon icoRegistrar = new ImageIcon("Images/btnRegistrar.png");
+
+        JButton btnComprar = new JButton(icoComprar);
+        btnComprar.setBounds(5, 25, 75, 75);
+        btnComprar.setActionCommand("Comprar");;
+        JButton btnVender = new JButton(icoVender);
+        btnVender.setBounds(5, 105, 75, 75);
+        btnVender.setActionCommand("Vender");;
+        JButton btnRegistrar = new JButton(icoRegistrar);
+        btnRegistrar.setBounds(5, 185, 75, 75);
+        btnRegistrar.setActionCommand("Registrar");
+
+        Nucleo.Execute_Query("SELECT * FROM proveedor");
+
+        JList lstProveedores = new JList();
 
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -33,9 +47,9 @@ public class Ventana_Principal extends JFrame implements ActionListener {
         mainFrame.add(btnVender);
         mainFrame.add(btnRegistrar);
 
-        mainFrame.setLayout(new GridLayout(3,1));
+        mainFrame.setLayout(null);
 
-        mainFrame.setSize(500, 275);
+        mainFrame.setSize(500, 325);
         mainFrame.setVisible(true);
 
     }
@@ -43,9 +57,9 @@ public class Ventana_Principal extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //System.out.print(e.getActionCommand());
-        if (e.getActionCommand() == "Comprar productos") {
+        if (e.getActionCommand() == "Comprar") {
             Ventana_Ventas VC = new Ventana_Ventas();
-        } else if (e.getActionCommand() == "Vender productos"){
+        } else if (e.getActionCommand() == "Vender"){
             Ventana_Ventas VV = new Ventana_Ventas();
         } else if (e.getActionCommand() == "Registrar"){
            Ventana_Registro VR = new Ventana_Registro();

@@ -7,7 +7,7 @@ class Nucleo{
     public static List<Proveedor> lst_Proveedores = new ArrayList<Proveedor>();
     private static Connection con = null;
     
-    public static void Execute_Query(String query){
+    public static Object Execute_Query(String query){
         try {
             String myDriver = "org.gjt.mm.mysql.Driver";
             String myUrl = "jdbc:mysql://localhost/pventa";
@@ -19,6 +19,10 @@ class Nucleo{
 
                 if (query.matches("INSERT INTO.*")){
                     st.executeUpdate(query);
+                    return null;
+                } else if (query.matches("SELECT.*")){
+                    ResultSet rs = st.executeQuery(query);
+                    return rs;
                 }
             }
             con.close();
@@ -26,6 +30,7 @@ class Nucleo{
             System.out.println("Sin conexion");
             System.err.println(e.getMessage());
         }
+        return null;
     }
 
     public static void main(String[] args) {
