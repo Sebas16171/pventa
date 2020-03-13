@@ -33,9 +33,27 @@ public class Ventana_Principal extends JFrame implements ActionListener {
         btnRegistrar.setBounds(5, 185, 75, 75);
         btnRegistrar.setActionCommand("Registrar");
 
-        Nucleo.Execute_Query("SELECT * FROM proveedor");
+        String name_Array[] = {""};
+        for (int i = 0 ; i < Nucleo.lst_Proveedores.size() ; i++){
+            name_Array[i] = Nucleo.lst_Proveedores.get(i).nombre;
+        }
 
-        JList lstProveedores = new JList();
+        JList lstProveedores = new JList(name_Array);
+        lstProveedores.setBounds(300, 45, 120, 220);
+
+        String Nombres_Clientes[] = {""};
+        for (int i = 0 ; i < Nucleo.lst_Clientes.size() ; i++){
+            Nombres_Clientes[i] = Nucleo.lst_Clientes.get(i).nombre;
+        }
+
+        JList lstClientes = new JList(Nombres_Clientes);
+        lstClientes.setBounds(430, 45, 120, 220);
+
+        JLabel lblProveedores = new JLabel("Proveedores");
+        JLabel lblClientes = new JLabel("Clientes");
+
+        lblProveedores.setBounds(300, 25, 100, 20);
+        lblClientes.setBounds(430, 25, 100, 20);
 
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -46,10 +64,14 @@ public class Ventana_Principal extends JFrame implements ActionListener {
         mainFrame.add(btnComprar);
         mainFrame.add(btnVender);
         mainFrame.add(btnRegistrar);
+        mainFrame.add(lstProveedores);
+        mainFrame.add(lstClientes);
+        mainFrame.add(lblProveedores);
+        mainFrame.add(lblClientes);
 
         mainFrame.setLayout(null);
 
-        mainFrame.setSize(500, 325);
+        mainFrame.setSize(600, 325);
         mainFrame.setVisible(true);
 
     }

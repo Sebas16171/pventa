@@ -33,34 +33,55 @@ class Nucleo {
         return null;
     }
 
-    public static void main(String[] args) {
-        Execute_Query("");
-
-        ResultSet Proveedores = Execute_Query("SELECT * FROM `proveedor`");
-
+    public static void Carga_Datos(){
+        ResultSet Datos_Consulta = Execute_Query("SELECT * FROM `proveedor`");
+        Proveedor temp_Proveedor = null;
+        
         try {
-            while (Proveedores.next()) {
-                int id = Proveedores.getInt("id_proveedor");
-                String nombre = Proveedores.getString("nombre");
-                String rfc = Proveedores.getString("rfc");
-                String telefono = Proveedores.getString("telefono");
-                String correo = Proveedores.getString("correo");
-                boolean activo = Proveedores.getBoolean("activo");
-
+            while (Datos_Consulta.next()) {
+                int id = Datos_Consulta.getInt("id_proveedor");
+                String nombre = Datos_Consulta.getString("nombre");
+                String rfc = Datos_Consulta.getString("rfc");
+                String telefono = Datos_Consulta.getString("telefono");
+                String correo = Datos_Consulta.getString("correo");
+                boolean activo = Datos_Consulta.getBoolean("activo");
+                
                 // print the results
-                System.out.format("%s, %s, %s, %s, %s, %s\n", id, nombre, rfc, telefono, correo, activo);
+                temp_Proveedor = new Proveedor(id, nombre, rfc, telefono, correo, activo);
+                lst_Proveedores.add(temp_Proveedor);
+                //System.out.format("%s, %s, %s, %s, %s, %s\n", id, nombre, rfc, telefono, correo, activo);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        Datos_Consulta = Execute_Query("SELECT * FROM `cliente`");
+        Cliente temp_Cliente = null;
+        
+        try {
+            while (Datos_Consulta.next()) {
+                int id = Datos_Consulta.getInt("id_cliente");
+                String nombre = Datos_Consulta.getString("nombre");
+                String rfc = Datos_Consulta.getString("rfc");
+                String correo = Datos_Consulta.getString("correo");
+                String telefono = Datos_Consulta.getString("telefono");
+                boolean activo = Datos_Consulta.getBoolean("activo");
+                
+                // print the results
+                temp_Cliente = new Cliente(id, nombre, rfc, telefono, correo, activo);
+                lst_Clientes.add(temp_Cliente);
+                
+                //System.out.format("%s, %s, %s, %s, %s, %s\n", id, nombre, rfc, telefono, correo, activo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        Carga_Datos();
+        Execute_Query("");
         Ventana_Principal V = new Ventana_Principal();
     }
 
-    public void reg_proveedor(int i_id, String i_nombre, String i_rfc, String i_telefono, String i_correo, boolean i_activo){
-
-    }
-
-    public void Guarda_Proveedor(Proveedor temp_prov){
-
-    }
 }
