@@ -93,10 +93,15 @@ class Ventana_Registro extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(null, "No se puede dejar ningun campo vacio.", "Error", 
                         JOptionPane.ERROR_MESSAGE);
             } else if (rdProveedor.isSelected() == true){
-                //                                      ID  Nombre  RFC Telefono    Correo  Activo
-                Proveedor temp_proveedor = new Proveedor(0, nombre, rfc, telefono, correo, true);
-                temp_proveedor.Guarda_SQL();
-                Nucleo.lst_Proveedores.add(temp_proveedor);
+                try {
+                    //                                      ID  Nombre  RFC Telefono    Correo  Activo
+                    Proveedor temp_proveedor = new Proveedor(0, nombre, rfc, telefono, correo, true);
+                    temp_proveedor.Guarda_SQL();
+                    Nucleo.lst_Proveedores.add(temp_proveedor);    
+                    JOptionPane.showMessageDialog(null, nombre + " fue registrado exitosamente.");
+                } catch (Exception err) {
+                    JOptionPane.showMessageDialog(null, "Error en el registro.");
+                }
                 
                 
             }else if (rdCliente.isSelected() == true){

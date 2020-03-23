@@ -33,7 +33,7 @@ public class Ventana_Principal extends JFrame implements ActionListener {
         btnRegistrar.setBounds(5, 185, 75, 75);
         btnRegistrar.setActionCommand("Registrar");
 
-        String name_Array[] = {""};
+        String name_Array[] = new String[Nucleo.lst_Proveedores.size()];
         for (int i = 0 ; i < Nucleo.lst_Proveedores.size() ; i++){
             name_Array[i] = Nucleo.lst_Proveedores.get(i).nombre;
         }
@@ -41,7 +41,7 @@ public class Ventana_Principal extends JFrame implements ActionListener {
         JList lstProveedores = new JList(name_Array);
         lstProveedores.setBounds(300, 45, 120, 220);
 
-        String Nombres_Clientes[] = {""};
+        String Nombres_Clientes[] = new String[Nucleo.lst_Clientes.size()];
         for (int i = 0 ; i < Nucleo.lst_Clientes.size() ; i++){
             Nombres_Clientes[i] = Nucleo.lst_Clientes.get(i).nombre;
         }
@@ -72,6 +72,7 @@ public class Ventana_Principal extends JFrame implements ActionListener {
         mainFrame.setLayout(null);
 
         mainFrame.setSize(600, 325);
+        mainFrame.setTitle("El Stim");
         mainFrame.setVisible(true);
 
     }
@@ -80,7 +81,7 @@ public class Ventana_Principal extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //System.out.print(e.getActionCommand());
         if (e.getActionCommand() == "Comprar") {
-            Ventana_Ventas VC = new Ventana_Ventas();
+            Ventana_Compras VC = new Ventana_Compras();
         } else if (e.getActionCommand() == "Vender"){
             Ventana_Ventas VV = new Ventana_Ventas();
         } else if (e.getActionCommand() == "Registrar"){
