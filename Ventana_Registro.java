@@ -105,9 +105,14 @@ class Ventana_Registro extends JFrame implements ActionListener{
                 
                 
             }else if (rdCliente.isSelected() == true){
-                Cliente temp_cliente = new Cliente(0, nombre, rfc, telefono, correo, true);
-                temp_cliente.Guarda_SQL();
-                Nucleo.lst_Clientes.add(temp_cliente);
+                try {
+                    Cliente temp_cliente = new Cliente(0, nombre, rfc, telefono, correo, true);
+                    temp_cliente.Guarda_SQL();
+                    Nucleo.lst_Clientes.add(temp_cliente);
+                    JOptionPane.showMessageDialog(null, nombre + " fue registrado exitosamente.");
+                } catch (Exception err) {
+                    JOptionPane.showMessageDialog(null, "Error en el registro.");
+                }
             }
 
         } else if (e.getActionCommand() == "Cancelar"){}
