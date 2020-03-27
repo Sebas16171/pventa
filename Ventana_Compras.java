@@ -138,6 +138,11 @@ public class Ventana_Compras extends JFrame implements ActionListener,KeyListene
             String Descripcion = (String)cmbArticulo.getSelectedItem();
             int cantidad = Integer.parseInt(txtCantidad.getText());
             double Precio = 0.00;
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            Date date = new Date();
+
+            String fecha = dateFormat.format(date);
+            int ID_Prov = ID_name_Array[cmbProveedor.getSelectedIndex()];
             if(!txtPrecio.getText().equals("")){
                 Precio = Double.parseDouble(txtPrecio.getText());
             }
@@ -146,35 +151,34 @@ public class Ventana_Compras extends JFrame implements ActionListener,KeyListene
                 sql = String.format(
                         "INSERT INTO `articulo` (`descripcion`, `precio`, `existencia`) VALUES ('%s', '%.2f', '%d')",
                         Descripcion, Precio, cantidad);
+
                 System.out.println(sql);
-
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                Date date = new Date();
-
-                String fecha = dateFormat.format(date);
-                int ID_Prov = ID_name_Array[cmbProveedor.getSelectedIndex()];
 
                 sql = String.format(
                         "INSERT INTO `compra` (`fecha`, `id_proveedor`, `id_articulo`, `cantidad`) VALUES ('%s', '%d', '%d', '%d')",
                         fecha, ID_Prov);
-            } else{
+                    } else{
 
-                int cantidad_actual = Nucleo.lst_Articulos.get(cmbArticulo.getSelectedIndex()).existencia;
-                int nueva_cantidad = cantidad_actual + cantidad;
+                        int i = 0;
 
-                //System.out.println(cantidad_actual);
-                //System.out.println(cantidad);
-                //System.out.println(nueva_cantidad);
-                
-                int art_ID = ID_game_Array[cmbArticulo.getSelectedIndex()];
-                sql = String.format("UPDATE `articulo` SET `existencia` = '%d' WHERE `articulo`.`id_articulo` = %d", nueva_cantidad, art_ID);
-                System.out.println(sql);
-                //--------------------------------------------------------------------------
-                //  SIGUIENTE: GENERAR SQL PARA INSERTAR LA COMPRA EN LA TABLA DE COMPRAS
-                //--------------------------------------------------------------------------
+                        for(i = 0; i < Nucleo.lst_Articulos.size() ; i++){
+                            if(Nucleo.lst_Articulos.get(i).descripcion.equals(Descripcion)){
+                                Nucleo.lst_Articulos.get(i).Surtir(cantidad);
+                                break;
+                            }
+                        }
+
+                        Compra temp_compra = new Compra(Nucleo.lst_Compras.size()
+                                + 1, ID_Prov, Nucleo.lst_Articulos.get(i).id_articulo, cantidad, fecha);
+
+                        temp_compra.Guarda_SQL();
+                        Nucleo.lst_Compras.add(temp_compra);
+
+                        JOptionPane.showMessageDialog(null, Descripcion + " fue abastecido exitosamente.");
+
+                    }
+                }
             }
-        }
-    }
 
     @Override
     public void keyTyped(KeyEvent e) {

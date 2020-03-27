@@ -7,6 +7,7 @@ class Nucleo {
     public static List<Proveedor> lst_Proveedores = new ArrayList<Proveedor>();
     public static List<Cliente> lst_Clientes = new ArrayList<Cliente>();
     public static List<Articulo> lst_Articulos = new ArrayList<Articulo>();
+    public static List<Compra> lst_Compras = new ArrayList<Compra>();
 
     //Conexion
     private static Connection con = null;
@@ -27,8 +28,8 @@ class Nucleo {
                 Statement st = con.createStatement();
 
                 //Identifico si la consulta retornara datos o no
-                if (query.matches("INSERT INTO.*")) {
-                    //Insert no retorna datos, por lo que solo debo ejecutar la consulta
+                if (query.matches("INSERT INTO.*") || query.matches("UPDATE.*")) {
+                    //Insert y Update no retornan datos, por lo que solo debo ejecutar la consulta
                     st.executeUpdate(query);
                     return null;
                 } else if (query.matches("SELECT.*")) {
@@ -108,6 +109,24 @@ class Nucleo {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        Datos_Consulta = Execute_Query("SELECT * FROM `compra`");
+        Compra temp_Compra = null;
+
+        try {
+            while(Datos_Consulta.next()){
+                int id = Datos_Consulta.getInt("id_venta");
+                String fecha = Datos_Consulta.getString("fecha");
+                int id_proveedor = Datos_Consulta.getInt("id_proveedor");
+                int id_articulo = Datos_Consulta.getInt("id_articulo");
+                int cantidad = Datos_Consulta.getInt("cantidad");
+                
+                temp_Compra = new Compra(id, id_proveedor, id_articulo, cantidad, fecha);
+                lst_Compras.add(temp_Compra);
+            }
+        } catch (Exception e) {
+            //TODO: handle exception
         }
     }
 

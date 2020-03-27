@@ -25,7 +25,7 @@ public class Proveedor{
         String sql = String.format( "INSERT INTO `proveedor` (`nombre`, `rfc`, `telefono`, `correo`, `activo`)"+
         " VALUES ('%s', '%s', '%s', '%s', '%s')", nombre, rfc, telefono, correo, SQL_Bool);
           
-        System.out.println(sql);
+        //System.out.println(sql);
 
         Nucleo.Execute_Query(sql);
         
