@@ -1,6 +1,8 @@
 import javax.swing.*;
 
 import java.awt.event.*;
+import java.text.*;
+import java.util.*;
 
 public class Ventana_Compras extends JFrame implements ActionListener,KeyListener {
     // Pido nombre del cliente, del articulo y cantidad de articulos
@@ -134,20 +136,44 @@ public class Ventana_Compras extends JFrame implements ActionListener,KeyListene
             String sql = "";
 
             String Descripcion = (String)cmbArticulo.getSelectedItem();
-            double Precio = Double.parseDouble(txtPrecio.getText());
-            int existencia = Integer.parseInt(txtCantidad.getText());
+            int cantidad = Integer.parseInt(txtCantidad.getText());
+            double Precio = 0.00;
+            if(!txtPrecio.getText().equals("")){
+                Precio = Double.parseDouble(txtPrecio.getText());
+            }
+            
+            if (Nuevo_Dato){
+                sql = String.format(
+                        "INSERT INTO `articulo` (`descripcion`, `precio`, `existencia`) VALUES ('%s', '%.2f', '%d')",
+                        Descripcion, Precio, cantidad);
+                System.out.println(sql);
 
-            sql = String.format("INSERT INTO `articulo` (`descripcion`, `precio`, `existencia`) VALUES ('%s', '%.2f', '%d')", Descripcion, Precio, existencia);
-            System.out.println(sql);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                Date date = new Date();
 
-            sql = "INSERT INTO `compra` (`id_venta`, `fecha`, `id_proveedor`, `id_articulo`, `cantidad`) VALUES (NULL, '2020-03-18', '2', '2', '20')";
-            if (Nuevo_Dato == true){
+                String fecha = dateFormat.format(date);
+                int ID_Prov = ID_name_Array[cmbProveedor.getSelectedIndex()];
+
+                sql = String.format(
+                        "INSERT INTO `compra` (`fecha`, `id_proveedor`, `id_articulo`, `cantidad`) VALUES ('%s', '%d', '%d', '%d')",
+                        fecha, ID_Prov);
+            } else{
+
+                int cantidad_actual = Nucleo.lst_Articulos.get(cmbArticulo.getSelectedIndex()).existencia;
+                int nueva_cantidad = cantidad_actual + cantidad;
+
+                //System.out.println(cantidad_actual);
+                //System.out.println(cantidad);
+                //System.out.println(nueva_cantidad);
+                
+                int art_ID = ID_game_Array[cmbArticulo.getSelectedIndex()];
+                sql = String.format("UPDATE `articulo` SET `existencia` = '%d' WHERE `articulo`.`id_articulo` = %d", nueva_cantidad, art_ID);
+                System.out.println(sql);
+                //--------------------------------------------------------------------------
+                //  SIGUIENTE: GENERAR SQL PARA INSERTAR LA COMPRA EN LA TABLA DE COMPRAS
+                //--------------------------------------------------------------------------
             }
         }
-        //String cliente = combo.getText();
-        //String articulo = txtArticulo.getText();
-        //String cantidad = txtCantidad.getText();
-        // JOptionPane.showMessageDialog(this, "Hola " + nombre + ".");
     }
 
     @Override
