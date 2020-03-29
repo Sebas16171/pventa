@@ -13,6 +13,9 @@ public class Articulo{
 
     public void GuardaNuevo(){
         String sql = String.format("INSERT INTO `articulo` (`descripcion`, `precio`, `existencia`) VALUES ('%s', '%.2f', '%d')", descripcion, precio, existencia);
+
+        System.out.println(sql);
+        Nucleo.Execute_Query(sql);
     }
 
     public void Surtir(int Cantidad){

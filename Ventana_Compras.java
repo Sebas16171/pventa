@@ -65,12 +65,14 @@ public class Ventana_Compras extends JFrame implements ActionListener,KeyListene
         lblCantidad.setBounds(25, 175, 100, 30);
         txtCantidad.setBounds(50, 200, 250, 30);
 
-        //txtCantidad.addKeyListener(this);
+        txtCantidad.addKeyListener(this);
         
         lblPrecio = new JLabel("Precio");
         txtPrecio = new JTextField();
         lblPrecio.setBounds(25, 250, 100, 30);
         txtPrecio.setBounds(50, 275, 250, 30);
+
+        txtPrecio.addKeyListener(this);
 
         JButton btnCancelar = new JButton("Cancelar");
         JButton btnListo = new JButton("Listo");
@@ -133,7 +135,6 @@ public class Ventana_Compras extends JFrame implements ActionListener,KeyListene
             }
             
         } else if (e.getActionCommand() == "Listo"){
-            String sql = "";
 
             String Descripcion = (String)cmbArticulo.getSelectedItem();
             int cantidad = Integer.parseInt(txtCantidad.getText());
@@ -148,15 +149,20 @@ public class Ventana_Compras extends JFrame implements ActionListener,KeyListene
             }
             
             if (Nuevo_Dato){
-                sql = String.format(
-                        "INSERT INTO `articulo` (`descripcion`, `precio`, `existencia`) VALUES ('%s', '%.2f', '%d')",
-                        Descripcion, Precio, cantidad);
 
-                System.out.println(sql);
+                int Nuevo_ID = Nucleo.lst_Articulos.size() +1;
 
-                sql = String.format(
-                        "INSERT INTO `compra` (`fecha`, `id_proveedor`, `id_articulo`, `cantidad`) VALUES ('%s', '%d', '%d', '%d')",
-                        fecha, ID_Prov);
+                Articulo temp_articulo = new Articulo(Nuevo_ID, Descripcion, Precio, cantidad);
+                Nucleo.lst_Articulos.add(temp_articulo);
+                temp_articulo.GuardaNuevo();
+
+                Compra temp_compra = new Compra(Nucleo.lst_Compras.size() + 1, ID_Prov, Nuevo_ID, cantidad, fecha);
+
+                temp_compra.Guarda_SQL();
+                Nucleo.lst_Compras.add(temp_compra);
+
+                JOptionPane.showMessageDialog(null, Descripcion + " fue abastecido exitosamente.");
+
                     } else{
 
                         int i = 0;
@@ -182,14 +188,9 @@ public class Ventana_Compras extends JFrame implements ActionListener,KeyListene
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        //System.out.println(e.getKeyChar());
-        //System.out.println(e.getKeyCode());
 
-        
         if (e.getKeyChar() != '.' && e.getKeyChar() < '0' || e.getKeyChar() > '9') {
-            // System.out.println("No Nonber");
-            txtCantidad.setText(txtCantidad.getText());
+            e.consume();
         }
     }
 
