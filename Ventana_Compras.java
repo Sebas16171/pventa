@@ -183,6 +183,8 @@ public class Ventana_Compras extends JFrame implements ActionListener,KeyListene
                         JOptionPane.showMessageDialog(null, Descripcion + " fue abastecido exitosamente.");
 
                     }
+                } else if (e.getActionCommand() == "Cancelar"){
+                    mainFrame.dispose();
                 }
             }
 

@@ -28,4 +28,14 @@ public class Articulo{
         Nucleo.Execute_Query(sql);
     }
 
+    public void Vender(int Cantidad) {
+        existencia = existencia - Cantidad;
+
+        String sql = String.format("UPDATE `articulo` SET `existencia` = '%d' WHERE `articulo`.`id_articulo` = %d",
+                existencia, id_articulo);
+
+        System.out.println(sql);
+        Nucleo.Execute_Query(sql);
+    }
+
 }

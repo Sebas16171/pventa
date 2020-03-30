@@ -8,6 +8,7 @@ class Nucleo {
     public static List<Cliente> lst_Clientes = new ArrayList<Cliente>();
     public static List<Articulo> lst_Articulos = new ArrayList<Articulo>();
     public static List<Compra> lst_Compras = new ArrayList<Compra>();
+    public static List<Venta> lst_Ventas = new ArrayList<Venta>();
 
     //Conexion
     private static Connection con = null;
