@@ -82,18 +82,39 @@ public class Ventana_Ventas extends JFrame implements ActionListener,KeyListener
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand() == "Listo"){
 
+            boolean Procede_Venta = true;
+
+            int existencia = Nucleo.lst_Articulos.get(cmbArticulo.getSelectedIndex()).existencia;
+            String descripcion = Nucleo.lst_Articulos.get(cmbArticulo.getSelectedIndex()).descripcion;
+
             int ID_Venta = Nucleo.lst_Ventas.size() + 1;
             int ID_Cliente = cmbCliente.getSelectedIndex() + 1;
             int ID_Articulo = cmbArticulo.getSelectedIndex() + 1;
             int Cantidad = Integer.parseInt(txtCantidad.getText());
             double Precio = Nucleo.lst_Articulos.get(cmbArticulo.getSelectedIndex()).precio;
+            
+            if (existencia - Cantidad < 0) {
+                Procede_Venta = false;
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog(null,
+                        "Solo hay " + existencia + " " + descripcion + "(s), ¿Desea realizar la venta de " + existencia + "?", "Warning", dialogButton);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    Cantidad = existencia;
+                    Procede_Venta = true;
+                }
+            }
 
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-            Date date = new Date();
-            String Fecha = dateFormat.format(date);
+            if (Procede_Venta) {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                Date date = new Date();
+                String Fecha = dateFormat.format(date);
+    
+                Venta temp_venta = new Venta(ID_Venta, ID_Cliente, ID_Articulo, Cantidad, Precio, Fecha);
+                temp_venta.GuardaSQL();
+    
+                Nucleo.lst_Articulos.get(cmbArticulo.getSelectedIndex()).Vender(Cantidad);
+            }
 
-            Venta temp_venta = new Venta(ID_Venta, ID_Cliente, ID_Articulo, Cantidad, Precio, Fecha);
-            temp_venta.GuardaSQL();
 
         }else if (e.getActionCommand() == "Cancelar"){
             mainFrame.dispose();

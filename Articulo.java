@@ -35,7 +35,7 @@ public class Articulo{
                 existencia, id_articulo);
 
         System.out.println(sql);
-        Nucleo.Execute_Query(sql);
+        //Nucleo.Execute_Query(sql);
     }
 
 }

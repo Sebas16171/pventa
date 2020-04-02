@@ -1,7 +1,7 @@
 import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class Ventana_Principal extends JFrame implements ActionListener {
     // Pido nombre del cliente, del articulo y cantidad de articulos
@@ -48,6 +48,14 @@ public class Ventana_Principal extends JFrame implements ActionListener {
 
         JList lstClientes = new JList(Nombres_Clientes);
         lstClientes.setBounds(430, 45, 120, 220);
+
+        lstClientes.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                if (me.getClickCount() == 2) {
+                    Ventana_Consultas V_Con = new Ventana_Consultas(Nucleo.lst_Clientes);
+                }
+            }
+        });
 
         JLabel lblProveedores = new JLabel("Proveedores");
         JLabel lblClientes = new JLabel("Clientes");
