@@ -23,6 +23,12 @@ public class Ventana_Ventas extends JFrame implements ActionListener,KeyListener
     public Ventana_Ventas(){
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Iniciar_Ventana();
+        mainFrame.addWindowListener(new WindowAdapter() {
+
+            public void windowClosing(WindowEvent e) {
+                Nucleo.Gen_Window();
+            }
+        });
     }
 
     private void Iniciar_Ventana(){
@@ -118,6 +124,7 @@ public class Ventana_Ventas extends JFrame implements ActionListener,KeyListener
 
         }else if (e.getActionCommand() == "Cancelar"){
             mainFrame.dispose();
+            Nucleo.Gen_Window();
         }
     }
 

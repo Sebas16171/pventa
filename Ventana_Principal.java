@@ -13,6 +13,12 @@ public class Ventana_Principal extends JFrame implements ActionListener {
 
     public Ventana_Principal() {
         Iniciar_Ventana();
+        mainFrame.addWindowListener(new WindowAdapter() {
+
+            public void windowClosing(WindowEvent e) {
+                Nucleo.Gen_Window();
+            }
+        });
     }
 
     private void Iniciar_Ventana() {
@@ -41,6 +47,15 @@ public class Ventana_Principal extends JFrame implements ActionListener {
         JList lstProveedores = new JList(name_Array);
         lstProveedores.setBounds(300, 45, 120, 220);
 
+        lstProveedores.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                if (me.getClickCount() == 2) {
+                    Ventana_Consultas V_Con = new Ventana_Consultas(Nucleo.lst_Proveedores, false);
+                    mainFrame.dispose();
+                }
+            }
+        });
+
         String Nombres_Clientes[] = new String[Nucleo.lst_Clientes.size()];
         for (int i = 0 ; i < Nucleo.lst_Clientes.size() ; i++){
             Nombres_Clientes[i] = Nucleo.lst_Clientes.get(i).nombre;
@@ -53,6 +68,7 @@ public class Ventana_Principal extends JFrame implements ActionListener {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {
                     Ventana_Consultas V_Con = new Ventana_Consultas(Nucleo.lst_Clientes);
+                    mainFrame.dispose();
                 }
             }
         });
@@ -90,10 +106,13 @@ public class Ventana_Principal extends JFrame implements ActionListener {
         //System.out.print(e.getActionCommand());
         if (e.getActionCommand() == "Comprar") {
             Ventana_Compras VC = new Ventana_Compras();
+            mainFrame.dispose();
         } else if (e.getActionCommand() == "Vender"){
             Ventana_Ventas VV = new Ventana_Ventas();
+            mainFrame.dispose();
         } else if (e.getActionCommand() == "Registrar"){
            Ventana_Registro VR = new Ventana_Registro();
+           mainFrame.dispose();
         }
     }
     

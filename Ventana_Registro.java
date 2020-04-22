@@ -1,7 +1,7 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import java.awt.event.*;
+
 
 class Ventana_Registro extends JFrame implements ActionListener{
 
@@ -17,6 +17,12 @@ class Ventana_Registro extends JFrame implements ActionListener{
 
     public Ventana_Registro(){
         Iniciar_Ventana();
+        mainFrame.addWindowListener(new WindowAdapter() {
+
+            public void windowClosing(WindowEvent e) {
+                Nucleo.Gen_Window();
+            }
+        });
     }
 
     private void Iniciar_Ventana(){
@@ -115,7 +121,10 @@ class Ventana_Registro extends JFrame implements ActionListener{
                 }
             }
 
-        } else if (e.getActionCommand() == "Cancelar"){}
+        } else if (e.getActionCommand() == "Cancelar"){
+                    mainFrame.dispose();
+                    Nucleo.Gen_Window();
+            }
     }
 
 }

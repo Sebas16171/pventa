@@ -131,9 +131,13 @@ class Nucleo {
         }
     }
 
+    public static void Gen_Window(){
+        Ventana_Principal V = new Ventana_Principal();
+    }
+
     public static void main(String[] args) {
         Carga_Datos();
-        Ventana_Principal V = new Ventana_Principal();
+        Gen_Window();
     }
 
 }
