@@ -80,4 +80,36 @@ public class Ventana_Consultas {
         mainFrame.setVisible(true);
     }
 
+    public Ventana_Consultas(List<Articulo> Datos, char c){
+        mainFrame = new JFrame();
+
+        mainFrame.addWindowListener(new WindowAdapter() {
+
+            public void windowClosing(WindowEvent e) {
+                Nucleo.Gen_Window();
+            }
+        });
+
+        String[] Encabezado = { "ID", "Descripcion", "Precio", "Existencia" };
+        String[][] datos = new String[Datos.size()][10];
+
+        for (int i = 0; i < Datos.size(); i++) {
+            datos[i][0] = String.valueOf(Datos.get(i).id_articulo);
+            datos[i][1] = Datos.get(i).descripcion;
+            datos[i][2] = String.valueOf(Datos.get(i).precio);
+            datos[i][3] = String.valueOf(Datos.get(i).existencia);
+        }
+
+        Tabla = new JTable(datos, Encabezado);
+        Scroll = new JScrollPane(Tabla);
+        Scroll.setBounds(25, 25, 500, 400);
+
+        mainFrame.add(Scroll);
+
+        mainFrame.setLayout(null);
+        mainFrame.setSize(700, 500);
+        mainFrame.setTitle("Consultas");
+        mainFrame.setVisible(true);
+    }
+
 }

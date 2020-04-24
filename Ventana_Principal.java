@@ -59,10 +59,10 @@ public class Ventana_Principal extends JFrame implements ActionListener {
             Nombres_Clientes[i] = Nucleo.lst_Clientes.get(i).nombre;
         }
 
-        String Ventas[] = new String[Nucleo.lst_Ventas.size()];
-        for (int i = 0 ; i < Nucleo.lst_Ventas.size() ; i++){
-            //Ventas[i] = Nucleo.lst_Ventas.get(i)
-        }
+        //String Articulolst_Articulos[] = new String[Nucleo.lst_Articulos.size()];
+        //for (int i = 0 ; i < Nucleo.lst_Articulos.size() ; i++){
+        //    Articulo.lst_Articulos[i] = Nucleo.lst_Articulos.get(i)
+        //}
 
         JList lstClientes = new JList(Nombres_Clientes);
         lstClientes.setBounds(430, 45, 120, 220);
