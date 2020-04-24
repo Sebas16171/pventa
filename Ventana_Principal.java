@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class Ventana_Principal extends JFrame implements ActionListener {
@@ -59,6 +57,11 @@ public class Ventana_Principal extends JFrame implements ActionListener {
         String Nombres_Clientes[] = new String[Nucleo.lst_Clientes.size()];
         for (int i = 0 ; i < Nucleo.lst_Clientes.size() ; i++){
             Nombres_Clientes[i] = Nucleo.lst_Clientes.get(i).nombre;
+        }
+
+        String Ventas[] = new String[Nucleo.lst_Ventas.size()];
+        for (int i = 0 ; i < Nucleo.lst_Ventas.size() ; i++){
+            //Ventas[i] = Nucleo.lst_Ventas.get(i)
         }
 
         JList lstClientes = new JList(Nombres_Clientes);

@@ -20,6 +20,8 @@ public class Venta{
             "INSERT INTO `venta` (`fecha`, `id_cliente`, `id_articulo`, `cantidad`, `precio`, `importe`) VALUES ('%s', '%d', '%d', '%d', '%.2f', '%.2f')",
             fecha, id_cliente, id_articulo, cantidad, precio, importe);
 
-            System.out.println(sql);
+            //System.out.println(sql);
+
+            Nucleo.Execute_Query(sql);
     }
 }

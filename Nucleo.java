@@ -10,8 +10,27 @@ class Nucleo {
     public static List<Compra> lst_Compras = new ArrayList<Compra>();
     public static List<Venta> lst_Ventas = new ArrayList<Venta>();
 
+    public static String Usuario, Clave;
+
     //Conexion
     private static Connection con = null;
+
+    public static boolean TestConnection(String name, String passwd){
+        try {
+            String myDriver = "org.gjt.mm.mysql.Driver"; // Driver
+            String myUrl = "jdbc:mysql://localhost/pventa"; // Ubicacion de los datos
+            Class.forName(myDriver); // Asigno el driver
+
+            con = DriverManager.getConnection(myUrl, name, passwd);
+
+            Usuario = name;
+            Clave = passwd;
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        
+    }
 
     public static ResultSet Execute_Query(String query) {
 
@@ -22,7 +41,9 @@ class Nucleo {
             Class.forName(myDriver);    //Asigno el driver
 
             //Inicio la conexion
-            con = DriverManager.getConnection(myUrl, "root", "");
+            con = DriverManager.getConnection(myUrl, Usuario, Clave);
+
+            
 
             //Si la consulta no esta vacia
             if (query != "") {
@@ -136,8 +157,9 @@ class Nucleo {
     }
 
     public static void main(String[] args) {
-        Carga_Datos();
-        Gen_Window();
+        Ventana_Login VL = new Ventana_Login();
+        //Carga_Datos();
+        //Gen_Window();
     }
 
 }

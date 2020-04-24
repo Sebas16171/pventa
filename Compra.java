@@ -15,7 +15,7 @@ public class Compra{
             "INSERT INTO `compra` (`fecha`, `id_proveedor`, `id_articulo`, `cantidad`) VALUES ('%s', '%d', '%d', '%d')",
             fecha, id_proveedor, id_articulo, cantidad);
 
-        System.out.println(sql);
+        //System.out.println(sql);
 
         Nucleo.Execute_Query(sql);
 
